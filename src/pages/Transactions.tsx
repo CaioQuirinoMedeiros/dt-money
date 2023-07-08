@@ -5,30 +5,10 @@ import { SearchForm } from '../components/SearchForm'
 import { Summary } from '../components/Summary'
 import { formatCurrency } from '../utils/formatCurrency'
 import { format, parseISO } from 'date-fns'
-
-type TransactionResponse = {
-  id: number
-  description: string
-  type: 'income' | 'outcome'
-  category: string
-  price: number
-  createdAt: string
-}
+import { TransactionsContext } from '../contexts/TransactionsContext'
 
 export function Transactions() {
-  const [transactions, setTransactions] = React.useState<TransactionResponse[]>(
-    []
-  )
-
-  React.useEffect(() => {
-    fetch('http://localhost:3000/transactions', { method: 'GET' })
-      .then((response) => {
-        return response.json()
-      })
-      .then((responseData: TransactionResponse[]) => {
-        setTransactions(responseData)
-      })
-  }, [])
+  const { transactions } = React.useContext(TransactionsContext)
 
   return (
     <main>

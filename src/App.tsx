@@ -1,7 +1,12 @@
 import { ThemeProvider } from 'styled-components'
 import { Transactions } from './pages/Transactions'
 import './index.css'
+import { TransactionsContextProvider } from './contexts/TransactionsContext'
 
 export function App() {
-  return <Transactions />
+  return (
+    <TransactionsContextProvider>
+      <Transactions />
+    </TransactionsContextProvider>
+  )
 }
