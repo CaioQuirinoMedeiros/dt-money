@@ -1,24 +1,9 @@
-import * as React from 'react'
-
 import { ArrowCircleUp, ArrowCircleDown, CurrencyDollar } from 'phosphor-react'
-import { TransactionsContext } from '../contexts/TransactionsContext'
 import { formatCurrency } from '../utils/formatCurrency'
+import { useTransactionsSummary } from '../hooks/useTransactionsSummary'
 
 export function Summary() {
-  const { transactions } = React.useContext(TransactionsContext)
-
-  const { sumIncome, sumOutcome } = transactions.reduce(
-    (acc, transaction) => {
-      if (transaction.type === 'income') {
-        acc.sumIncome += transaction.price
-      } else if (transaction.type === 'outcome') {
-        acc.sumOutcome += transaction.price
-      }
-
-      return acc
-    },
-    { sumIncome: 0, sumOutcome: 0 }
-  )
+  const { sumIncome, sumOutcome } = useTransactionsSummary()
 
   return (
     <section className='w-full max-w-[1120px] mx-auto px-[1.5rem] grid grid-cols-3 gap-[2rem] mt-[-5rem]'>

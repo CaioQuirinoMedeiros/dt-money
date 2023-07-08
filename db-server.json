@@ -23,6 +23,22 @@
       "category": "Locomoção",
       "price": 245.89,
       "createdAt": "2023-07-04T07:23:00.000Z"
+    },
+    {
+      "description": "eaea",
+      "category": "Qualquer",
+      "price": 233,
+      "type": "income",
+      "createdAt": "2023-07-08T04:17:24.032Z",
+      "id": 4
+    },
+    {
+      "description": "Mais um",
+      "category": "Beleza",
+      "price": 600,
+      "type": "outcome",
+      "createdAt": "2023-07-08T04:20:38.217Z",
+      "id": 5
     }
   ]
 }

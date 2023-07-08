@@ -33,6 +33,7 @@ export function Transactions() {
                         : 'text-red'
                     }`}
                   >
+                    {transaction.type === "outcome" && "- "}
                     {formatCurrency(transaction.price)}
                   </td>
                   <td className='py-[1.25rem] px-[2rem] bg-gray-700'>
