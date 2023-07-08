@@ -1,9 +1,35 @@
+import * as React from 'react'
+
 import { Header } from '../components/Header'
 import { SearchForm } from '../components/SearchForm'
 import { Summary } from '../components/Summary'
+import { formatCurrency } from '../utils/formatCurrency'
+import { format, parseISO } from 'date-fns'
+
+type TransactionResponse = {
+  id: number
+  description: string
+  type: 'income' | 'outcome'
+  category: string
+  price: number
+  createdAt: string
+}
 
 export function Transactions() {
-  const variant = 'income'
+  const [transactions, setTransactions] = React.useState<TransactionResponse[]>(
+    []
+  )
+
+  React.useEffect(() => {
+    fetch('http://localhost:3000/transactions', { method: 'GET' })
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseData: TransactionResponse[]) => {
+        setTransactions(responseData)
+      })
+  }, [])
+
   return (
     <main>
       <Header />
@@ -14,54 +40,30 @@ export function Transactions() {
 
         <table className='w-full border-separate border-spacing-x-0 border-spacing-y-[0.5rem] mt-[1.5rem]'>
           <tbody>
-            <tr>
-              <td className='w-[50%] py-[1.25rem] px-[2rem] bg-gray-700 rounded-tl-md rounded-bl-md'>
-                Desenvolvmento de site
-              </td>
-              <td
-                className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-light' : 'text-red'
-                }`}
-              >
-                R$ 12.000,00
-              </td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700'>Venda</td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700 rounded-tr-md rounded-br-md'>
-                13/04/2023
-              </td>
-            </tr>
-            <tr>
-              <td className='w-[50%] py-[1.25rem] px-[2rem] bg-gray-700 rounded-tl-md rounded-bl-md'>
-                Desenvolvmento de site
-              </td>
-              <td
-                className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-light' : 'text-red'
-                }`}
-              >
-                R$ 12.000,00
-              </td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700'>Venda</td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700 rounded-tr-md rounded-br-md'>
-                13/04/2023
-              </td>
-            </tr>
-            <tr>
-              <td className='w-[50%] py-[1.25rem] px-[2rem] bg-gray-700 rounded-tl-md rounded-bl-md'>
-                Desenvolvmento de site
-              </td>
-              <td
-                className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-light' : 'text-red'
-                }`}
-              >
-                R$ 12.000,00
-              </td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700'>Venda</td>
-              <td className='py-[1.25rem] px-[2rem] bg-gray-700 rounded-tr-md rounded-br-md'>
-                13/04/2023
-              </td>
-            </tr>
+            {transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id.toString()}>
+                  <td className='w-[50%] py-[1.25rem] px-[2rem] bg-gray-700 rounded-tl-md rounded-bl-md'>
+                    {transaction.description}
+                  </td>
+                  <td
+                    className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
+                      transaction.type === 'income'
+                        ? 'text-green-light'
+                        : 'text-red'
+                    }`}
+                  >
+                    {formatCurrency(transaction.price)}
+                  </td>
+                  <td className='py-[1.25rem] px-[2rem] bg-gray-700'>
+                    {transaction.category}
+                  </td>
+                  <td className='py-[1.25rem] px-[2rem] bg-gray-700 rounded-tr-md rounded-br-md'>
+                    {format(parseISO(transaction.createdAt), 'dd/MM/yyyy')}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
