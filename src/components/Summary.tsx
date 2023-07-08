@@ -6,7 +6,7 @@ export function Summary() {
       <div className='bg-gray-600 rounded-md py-[1.5rem] px-[2rem]'>
         <header className='flex flex-row items-center justify-between text-gray-300 mb-[0.75rem]'>
           <span>Entradas</span>
-          <ArrowCircleUp size={32} className='text-green-300' />
+          <ArrowCircleUp size={32} className='text-green-light' />
         </header>
         <strong className='block mt-1rem text-[2rem]'>R$ 17.400,00</strong>
       </div>
@@ -14,12 +14,12 @@ export function Summary() {
       <div className='bg-gray-600 rounded-md py-[1.5rem] px-[2rem]'>
         <header className='flex flex-row items-center justify-between text-gray-300 mb-[0.75rem]'>
           <span>Saídas</span>
-          <ArrowCircleDown size={32} className='text-red-300' />
+          <ArrowCircleDown size={32} className='text-red' />
         </header>
         <strong className='block mt-1rem text-[2rem]'>R$ 17.400,00</strong>
       </div>
 
-      <div className='bg-green-700 rounded-md py-[1.5rem] px-[2rem]'>
+      <div className='bg-green-dark rounded-md py-[1.5rem] px-[2rem]'>
         <header className='flex flex-row items-center justify-between text-gray-300 mb-[0.75rem]'>
           <span>Total</span>
           <CurrencyDollar size={32} className='text-white' />

@@ -20,7 +20,7 @@ export function Transactions() {
               </td>
               <td
                 className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-300' : 'text-red-300'
+                  variant === 'income' ? 'text-green-light' : 'text-red'
                 }`}
               >
                 R$ 12.000,00
@@ -36,7 +36,7 @@ export function Transactions() {
               </td>
               <td
                 className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-300' : 'text-red-300'
+                  variant === 'income' ? 'text-green-light' : 'text-red'
                 }`}
               >
                 R$ 12.000,00
@@ -52,7 +52,7 @@ export function Transactions() {
               </td>
               <td
                 className={`py-[1.25rem] px-[2rem] bg-gray-700 ${
-                  variant === 'income' ? 'text-green-300' : 'text-red-300'
+                  variant === 'income' ? 'text-green-light' : 'text-red'
                 }`}
               >
                 R$ 12.000,00
