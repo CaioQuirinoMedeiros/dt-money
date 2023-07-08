@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useContextSelector } from 'use-context-selector'
 
 import * as Dialog from '@radix-ui/react-dialog'
 import * as RadioGroup from '@radix-ui/react-radio-group'
@@ -18,7 +18,13 @@ const newTransactionFormSchema = z.object({
 type NewTransactionFormData = z.infer<typeof newTransactionFormSchema>
 
 export function NewTransactionModal() {
-  const { addNewTransaction } = React.useContext(TransactionsContext)
+  const addNewTransaction = useContextSelector(
+    TransactionsContext,
+    (transactionsContext) => {
+      return transactionsContext.addNewTransaction
+    }
+  )
+
   const {
     control,
     register,
@@ -38,7 +44,6 @@ export function NewTransactionModal() {
     })
 
     reset()
-
   }
 
   return (
@@ -82,7 +87,7 @@ export function NewTransactionModal() {
               return (
                 <RadioGroup.Root
                   className='flex flex-row gap-[1rem]'
-                  onValueChange={(value) => field.onChange(value as "outcome")}
+                  onValueChange={(value) => field.onChange(value as 'outcome')}
                   value={field.value}
                   onBlur={field.onBlur}
                 >

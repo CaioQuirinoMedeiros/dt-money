@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useContextSelector } from 'use-context-selector'
 
 import { Header } from '../components/Header'
 import { SearchForm } from '../components/SearchForm'
@@ -8,7 +8,12 @@ import { format, parseISO } from 'date-fns'
 import { TransactionsContext } from '../contexts/TransactionsContext'
 
 export function Transactions() {
-  const { transactions } = React.useContext(TransactionsContext)
+  const transactions = useContextSelector(
+    TransactionsContext,
+    (transactionsContext) => {
+      return transactionsContext.transactions
+    }
+  )
 
   return (
     <main>
@@ -33,7 +38,7 @@ export function Transactions() {
                         : 'text-red'
                     }`}
                   >
-                    {transaction.type === "outcome" && "- "}
+                    {transaction.type === 'outcome' && '- '}
                     {formatCurrency(transaction.price)}
                   </td>
                   <td className='py-[1.25rem] px-[2rem] bg-gray-700'>
